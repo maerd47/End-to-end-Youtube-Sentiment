@@ -16,17 +16,8 @@ jobs:
 
 
 
-     - name: Clean previous images and containers
-  ``` `run: |
-    # Remove stopped containers
-       docker container prune -f
-
-    # Remove unused images
-       docker image prune -af
-
-    # Remove unused networks & build cache
-       docker system prune -f
-
+      - name: Full Docker cleanup
+        run: docker system prune -af --volumes
 
 
 
