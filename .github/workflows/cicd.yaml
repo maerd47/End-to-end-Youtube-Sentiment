@@ -13,7 +13,25 @@ permissions:
 
 jobs:
   integration:
-    name: Continuous Integration
+
+
+
+     - name: Clean previous images and containers
+  ``` `run: |
+    # Remove stopped containers
+       docker container prune -f
+
+    # Remove unused images
+       docker image prune -af
+
+    # Remove unused networks & build cache
+       docker system prune -f
+
+
+
+
+
+  name: Continuous Integration
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
