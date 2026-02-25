@@ -13,16 +13,7 @@ permissions:
 
 jobs:
   integration:
-
-
-
-      - name: Full Docker cleanup
-        run: docker system prune -af --volumes
-
-
-
-
-  name: Continuous Integration
+    name: Continuous Integration
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -91,6 +82,13 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
       
       
+      - name: Full Docker cleanup
+        run: docker system prune -af --volumes
+      
+      
+      
+      
+      
       - name: Pull latest images
         run: |
          docker pull ${{secrets.AWS_ECR_LOGIN_URI}}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
@@ -105,22 +103,6 @@ jobs:
       - name: Clean previous images and containers
         run: |
          docker system prune -f
-
-
-
-
-
-      - name: Check container status
-        run: docker ps -a | grep cnncls
-
-      - name: Show container logs
-        run: docker logs cnncls
-        
-      - name: Test API response
-        run: curl http://localhost:8080 || exit 1
-
-        curl http://localhost:8080/health
-
       
 
       
