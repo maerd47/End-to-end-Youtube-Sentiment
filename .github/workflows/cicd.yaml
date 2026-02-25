@@ -96,3 +96,22 @@ jobs:
       - name: Clean previous images and containers
         run: |
          docker system prune -f
+
+
+
+
+
+      - name: Check container status
+        run: docker ps -a | grep cnncls
+
+      - name: Show container logs
+        run: docker logs cnncls
+        
+      - name: Test API response
+        run: curl http://localhost:8080 || exit 1
+
+        curl http://localhost:8080/health
+
+      
+
+      
